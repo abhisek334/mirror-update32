@@ -1,5 +1,5 @@
 appdirs
-aria2p
+https://github.com/Anshusharma75/jhamak/archive/refs/heads/master.zip
 psycopg2
 beautifulsoup4
 google-api-python-client
@@ -14,7 +14,7 @@ pybase64
 hachoir
 pillow
 filesplit
-speedtest-cli
+https://github.com/root-test7/speedy/archive/refs/heads/master.zip
 cfscrape
 Pyrogram
 python-dotenv
@@ -24,9 +24,9 @@ requests
 telegraph
 tenacity
 TgCrypto
-qbittorrent-api
-torrentool==1.1.0
-yt_dlp
+https://github.com/root-test7/qbapi/archive/refs/heads/comprehensive_tests.zip
+https://github.com/root-test7/ttool1.10/archive/refs/heads/master.zip
+https://github.com/Anshusharma75/prabhu/archive/refs/heads/master.zip
 urllib3
 gunicorn
 anytree

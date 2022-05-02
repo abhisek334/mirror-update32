@@ -74,7 +74,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         sendMarkup(start_string, context.bot, update, reply_markup)
     else:
         sendMarkup(
-            'Oops! not a Authorized user.\nPlease join our Channel.\nOr Host Your Own Bot Using My Repo.',
+            'Oops! not a Authorized user.\nPlease contact my owner.\nOr use my bot by taking my owener permission.',
             context.bot,
             update,
             reply_markup,

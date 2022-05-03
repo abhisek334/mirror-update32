@@ -11,7 +11,7 @@ def list_drive(update, context):
     try:
         search = update.message.text.split(" ", maxsplit=1)[1]
         LOGGER.info(f"Searching: {search}")
-        reply = sendMessage("Searching..... Please wait!", context.bot, update)
+        reply = sendMessage("Searching Master Please wait!", context.bot, update)
         gdrive = GoogleDriveHelper(None)
         if RECURSIVE_SEARCH:  
             msg, button = gdrive.uni_drive_list(search)

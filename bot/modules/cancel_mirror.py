@@ -16,7 +16,7 @@ def cancel_mirror(update, context):
         gid = args[1]
         dl = getDownloadByGid(gid)
         if not dl:
-            sendMessage(f"GID: <code>{gid}</code> Not Found.", context.bot, update)
+            sendMessage(f"GID: <code>{gid}</code> What The Fuck You Doing.", context.bot, update)
             return
         mirror_message = dl.message
     elif update.message.reply_to_message:

@@ -1,8 +1,3 @@
-# mirror-update32## CONTACT
-••¤(`×  🎀  - [𝒳] 𝒯𝑒𝓁𝑒𝑔𝓇𝒶𝓂  🎀  ×`(¤•• --- 9732390526
-
-## CONTACT INSTAGRAM
--USE THIS LINK TO 📞 [INSTA LINK](https://www.instagram.com/abhisekmajumder331/)
 <h1 align="center">mirror bot by XDA 
 <a href="https://www.producthunt.com/posts/awesome-github-profiles?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-awesome-github-profiles" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=277987&theme=light" alt="Awesome GitHub Profiles - Best curated list of developers readme, updated every 15 min | Product Hunt" style="width: 200px; height: 44px;" width="200" height="44" /></a></h1>
 <div align="center">
@@ -23,3 +18,8 @@
 <a href="https://github.com/abhisheknaiidu/awesome-github-profile-readme/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/abhisheknaiidu/awesome-github-profile-readme?color=2b9348"></a>
 <a href="https://github.com/abhisheknaiidu/awesome-github-profile-readme/blob/master/LICENSE"><img src="https://img.shields.io/github/license/abhisheknaiidu/awesome-github-profile-readme?color=2b9348" alt="License Badge"/></a>
 
+  # mirror-update32## CONTACT
+••¤(`×  🎀  - [𝒳] 𝒯𝑒𝓁𝑒𝑔𝓇𝒶𝓂  🎀  ×`(¤•• --- 9732390526
+
+## CONTACT INSTAGRAM
+-USE THIS LINK TO 📞 [INSTA LINK](https://www.instagram.com/abhisekmajumder331/)

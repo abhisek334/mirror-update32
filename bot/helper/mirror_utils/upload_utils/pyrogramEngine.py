@@ -6,11 +6,11 @@ import os
 import logging
 import time
 
-from pyrogram.errors import FloodWait, RPCError
+from pyrogram.errors import FloodWait
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 
-from bot import app, DOWNLOAD_DIR, AS_DOCUMENT, AS_DOC_USERS, AS_MEDIA_USERS, LOGS_CHATS
+from bot import app, DOWNLOAD_DIR, AS_DOCUMENT, AS_DOC_USERS, AS_MEDIA_USERS
 from bot.helper.ext_utils.fs_utils import take_ss 
 
 LOGGER = logging.getLogger(__name__)
@@ -38,7 +38,6 @@ class TgUploader:
         self.as_doc = AS_DOCUMENT
         self.thumb = f"Thumbnails/{self.user_id}.jpg"
         self.sent_msg = self.__app.get_messages(self.chat_id, self.message_id)
-        self.corrupted = 0
 
     def upload(self):
         msgs_dict = {}
@@ -49,20 +48,13 @@ class TgUploader:
                 if self.is_cancelled:
                     return
                 up_path = os.path.join(dirpath, file)
-                fsize = os.path.getsize(up_path)
-                if fsize == 0:
-                    LOGGER.error(f"{up_path} size is zero, telegram don't upload zero size files")
-                    self.corrupted += 1
-                    continue
                 self.upload_file(up_path, file, dirpath)
                 if self.is_cancelled:
                     return
                 msgs_dict[file] = self.sent_msg.message_id
                 self.last_uploaded = 0
-        if len(msgs_dict) <= self.corrupted:
-            return self.__listener.onUploadError('Files Corrupted. Check logs')
         LOGGER.info(f"Leech Done: {self.name}")
-        self.__listener.onUploadComplete(self.name, None, msgs_dict, None, self.corrupted)
+        self.__listener.onUploadComplete(self.name, None, msgs_dict, None, None)
 
     def upload_file(self, up_path, file, dirpath):
         cap_mono = f"<code>{file}</code>"
@@ -95,11 +87,6 @@ class TgUploader:
                                                               supports_streaming=True,
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
-                    try:
-                        for i in LOGS_CHATS:
-                            app.send_video(i, video=self.sent_msg.video.file_id, caption=cap_mono)
-                    except Exception as err:
-                        LOGGER.error(f"Failed to forward file to log channel:\n{err}")
                     if self.thumb is None and thumb is not None and os.path.lexists(thumb):
                         os.remove(thumb)
                 elif file.upper().endswith(AUDIO_SUFFIXES):
@@ -118,11 +105,6 @@ class TgUploader:
                                                               thumb=thumb,
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
-                    try:
-                        for i in LOGS_CHATS:
-                            app.send_audio(i, audio=self.sent_msg.audio.file_id, caption=cap_mono)
-                    except Exception as err:
-                        LOGGER.error(f"Failed to forward file to log channel:\n{err}")
                 elif file.upper().endswith(IMAGE_SUFFIXES):
                     self.sent_msg = self.sent_msg.reply_photo(photo=up_path,
                                                               quote=True,
@@ -130,11 +112,6 @@ class TgUploader:
                                                               parse_mode="html",
                                                               disable_notification=True,
                                                               progress=self.upload_progress)
-                    try:
-                        for i in LOGS_CHATS:
-                            app.send_photo(i, photo=self.sent_msg.photo.file_id, caption=cap_mono)
-                    except Exception as err:
-                        LOGGER.error(f"Failed to forward file to log channel:\n{err}")
                 else:
                     notMedia = True
             if self.as_doc or notMedia:
@@ -149,11 +126,6 @@ class TgUploader:
                                                              parse_mode="html",
                                                              disable_notification=True,
                                                              progress=self.upload_progress)
-                try:
-                    for i in LOGS_CHATS:
-                        app.send_document(i, document=self.sent_msg.document.file_id, caption=cap_mono)
-                except Exception as err:
-                    LOGGER.error(f"Failed to forward file to log channel:\n{err}")
                 if self.thumb is None and thumb is not None and os.path.lexists(thumb):
                     os.remove(thumb)
             if not self.is_cancelled:
@@ -161,12 +133,6 @@ class TgUploader:
         except FloodWait as f:
             LOGGER.info(f)
             time.sleep(f.x)
-        except RPCError as e:
-            LOGGER.error(f"RPCError: {e} File: {up_path}")
-            self.corrupted += 1
-        except Exception as err:
-            LOGGER.error(f"{err} File: {up_path}")
-            self.corrupted += 1
     def upload_progress(self, current, total):
         if self.is_cancelled:
             self.__app.stop_transmission()
